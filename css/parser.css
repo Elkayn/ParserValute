@@ -1,0 +1,90 @@
+.menu {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 220px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #5d5c5b; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+/* The navigation menu links */
+.menu label,a {
+    padding: 3px 8px 6px 6px;
+    text-decoration: none;
+    width: 220px;
+    overflow-wrap: break-word;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.menu label,a:hover {
+    color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+    margin-left: 220px;
+    padding: 0px 10px;
+}
+.konvert-container{
+    height: 180px;
+}
+.konvert{
+    height: 100px;
+    width: 1150px;
+}
+
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #dddddd;
+	border-collapse: collapse; 
+}
+.table th {
+    width: 20%;
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+.table td {
+    width: 20%;
+	border: 1px solid #dddddd;
+	padding: 5px;
+}
+input, select {
+    background: #fbfbfb;
+    font-size: 24px;
+    line-height: 1;
+    padding: 3px;
+    margin: 0 6px 5px 0;
+    outline: none;
+    border: 1px solid #d9d9d9;
+}
+select {
+    width: 350px;
+}
+.input {
+    width: 200px;
+}
+.butthon{
+color: #fff;
+padding: 7px 12px;
+border-radius:4px;
+cursor: pointer;
+background-color: #818181;
+}
+
+.title{
+    text-align: center;
+    color: black;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .menu {padding-top: 15px;}
+    .menu label {font-size: 18px;}
+}
