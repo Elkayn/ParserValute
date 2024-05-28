@@ -8,7 +8,7 @@ else:
     require_once("includes/connection.php");
     $username = $_SESSION['session_username'];
     include_once('includes/rate.php');
-    $infoPerson = getInfo($username, $connection);
+    $infoPerson = getInfo($username, $pdo);
     include("includes/header.php"); ?>
 
 <title>Parser</title>
@@ -23,7 +23,7 @@ else:
     <p><a href="includes/logout.php">Выход</a></p>
 </div>
 <?php
-    getRates($connection);
+    getRates($pdo);
 ?>
 <div class="main">
     <div class="konvert-container">
@@ -31,19 +31,22 @@ else:
             <form action="" method="post">
                 <select name="selectValute">
                 <?php
-                $query = mysqli_query($connection, "SELECT * FROM valutes");
-                while($row = mysqli_fetch_assoc($query)){
-                    $selected = '';
-                    if (isset($_POST['selectValute']) && $_POST['selectValute'] == $row['NameValute']){
-                        $selected = 'selected';
-                    }?>
+                    $sql = "SELECT * FROM valutes";
+                    $selectResult = $pdo->prepare($sql);
+                    $selectResult->execute();
+                    $res = $selectResult->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($res as $row){
+                        $selected = '';
+                        if (isset($_POST['selectValute']) && $_POST['selectValute'] == $row['NameValute']){
+                            $selected = 'selected';
+                        }?>
                     <option <?php echo $selected; ?>><?php echo $row['NameValute']; ?></option>
                 <?php } ?>
                 </select>   
-                <input class="input" name="kolvo" value="<?php isset($_POST['buttonEn']) ? konvertingRound($connection) : '';?>">
+                <input class="input" name="kolvo" value="<?php isset($_POST['buttonEn']) ? konvertingRound($pdo) : '';?>">
                 <input name="buttonRub" type="submit" class="butthon" value="Конвертировать в рубли">
                 <p><select><option>Росскийский рубль</option></select>    
-                <input class="input" name="kolvoRus" value="<?php isset($_POST['buttonRub']) ? konverting($connection) : '';?>">
+                <input class="input" name="kolvoRus" value="<?php isset($_POST['buttonRub']) ? konverting($pdo) : '';?>">
                 <input name="buttonEn" type="submit" class="butthon" value="Конвертировать с рублей"></p>
             </form>
         </div>
@@ -60,8 +63,8 @@ else:
             </tr>
             <?php 
             $i = 1;
-            $query = mysqli_query($connection, "SELECT * FROM valutes");
-            while($row = mysqli_fetch_assoc($query)){
+            $rows = getTable($pdo);
+            foreach($rows as $row){
             ?>
                 <tr>
                     <td><?php echo $i++; ?></td>

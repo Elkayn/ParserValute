@@ -1,5 +1,11 @@
 <?php
 	require("constants.php");
 
-	$connection=mysqli_connect($host,$username,$password,$db_name);
+	try{
+		$pdo = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password); 
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	} catch(Exception $e){
+		exit ('Ошибка подключения: <br><br>' . $e -> getMessage());
+	}
+		
 ?>
